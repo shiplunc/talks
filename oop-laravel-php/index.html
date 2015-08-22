@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Object oriented programing with PHP</title>
+
+        <meta name="description" content="Object oriented programing with PHP">
+        <meta name="author" content="Shiplu Mokaddim">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+<!-- 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+-->
+
+<section>
+    <section data-markdown>
+    ## Object oriented programing
+    with
+    ## PHP  
+    </section>
+    <section data-markdown>
+    ### Things to learn
+        2. OOP Basic
+        3. OOP Advance
+        1. Design Pattern
+    </section>
+</section>
+<section data-markdown>
+## OOP Basic
+</section>
+<section data-markdown>
+#### Definitition
+Object-oriented programming (OOP) is a **programming paradigm** based on the concept of "**objects**", which are data structures that contain data, in the form of fields, often known as **attributes**; and code, in the form of procedures, often known as **methods**. 
+</section>
+<section data-markdown>
+- **Objects**
+    - Everything is an object
+     
+- **Attributes**
+    - They are the property of the object
+    - For a "Dog" object it'd be height, age
+ 
+- **Methods**
+    - Actions that an object can take.
+    - For a "Dog" object it'd be walk, bark
+</section>
+<section data-markdown>
+#### Simple Example
+```
+class SimpleClass
+{
+    // property/attribute declaration
+    public $var = 'a default value';
+
+    // method declaration
+    public function displayVar() {
+        echo $this->var;
+    }
+}
+
+// Run this code
+$sc = new SimpleClass();
+echo $sc->displayVar();
+
+// will print 'a default value'
+``` </section>
+<section data-markdown>
+#### DOG Example
+```php
+class Dog{
+    public $age;
+    public $color;
+    public $height;
+    public $weight;
+
+    public function __construct($color, $age, $height, $weight){
+        $this->age = $age;
+        $this->color = $color;
+        $this->height = $height;
+        $this->weight = $weight;
+    }
+    public function walk() {echo "I walked";}
+    public function bark() {echo "Woof! I am {$this->age} years old and a {$this->color} dog\n";}
+}
+```
+</section>
+<section data-markdown>
+```PHP
+$my_dog = new Dog('Brown', 10, 2.0, 20.0);
+$friends_dog = new Dog('Black', 9, 2.4, 22.0);
+$my_dog->bark();
+$friends_dog->bark();
+```
+Output
+```PHP
+Woof! I am 10 years old and a Brown dog
+Woof! I am 9 years old and a Black dog
+```
+</section>
+<section data-markdown>
+```
+$my_dog = new Dog('Brown', 10, 2.0, 20.0);
+```
+
+
+- Class is a blue print of an object
+- `$my_dog` is an object of `Dog`
+- `new` creates an object/instance of the class
+</section>
+<section data-markdown>
+**Constructor**
+
+- __construct() is called when an object is created
+- Any argument passed to the new expression will be passed to __construct
+- Used for initialization of the object
+</section>
+<section data-markdown>
+#### Example
+```
+class MyClass {
+   function __construct($param) {
+       print "In MyClass constructor with param = $param\n";
+   }
+}
+$obj = new MyClass("PHP");
+```
+#### Output
+
+    In MyClass constructor with param = PHP
+</section>
+<section data-markdown>
+**Destructor**
+
+- __destruct() method will be called as soon as there are no other references to a particular object, or in any order during the shutdown sequence.
+- This is called automatically by the Zend Engine
+</section>
+<section data-markdown>
+**$this variable**
+
+- Used inside methods
+- Its a reference to the object containg this method
+- In Java/C++ its "this"
+</section>
+<section>
+<h4>Example</h4>
+<pre><code data-trim contenteditable>
+class SimpleClass
+{
+    public $var = 'a default value';
+
+    public function displayVar() {
+        // here "$this" references "$sc"
+        echo $this->var;
+    }
+}
+// Run this code
+$sc = new SimpleClass();
+echo $sc->displayVar();
+
+// will print 'a default value'
+</code></pre>
+<ul><li><code>$this</code> in <code>$this->var</code> references <code>$sc</code></li>
+</section>
+<section data-markdown>
+### Accessing object
+
+- Set instance property is just like assigning to a PHP variable
+    - `$instance->property = "value"`
+    - `$box->width = 30`
+- Get instance property
+    - `print $box->width;` prints "30"
+- Access instance method almost same way
+    - `$box->volume();`
+- Access propery/method by scope Resolution Operator (`::`)
+    - The Scope Resolution Operator (`::`) is a token that allows access to static, constant, and overridden properties or methods of a class.
+    - It accesses class level properies
+    - Also called *Paamayim Nekudotayim*
+</section>
+<section>
+<h4>Example of Scope resolution operator</h4>
+<pre><code>
+class MyClass {
+    const CONST_VALUE = 'A constant value';
+}
+
+$classname = 'MyClass';
+echo $classname::CONST_VALUE; // As of PHP 5.3.0
+
+echo MyClass::CONST_VALUE;
+
+</code></pre>
+</section>
+<section>
+<h3>Object Inheritance</h3>
+<pre><code style="font-size:13px; line-spacing:1px; line-height:16px">class Foo{
+    public function printItem($string){
+        echo 'Foo: ' . $string . PHP_EOL;
+    }
+    public function printPHP(){
+        echo 'PHP is great.' . PHP_EOL;
+    }
+}
+
+class Bar extends Foo{
+    public function printItem($string){
+        echo 'Bar: ' . $string . PHP_EOL;
+    }
+}
+
+$foo = new Foo();
+$bar = new Bar();
+$foo->printItem('baz'); // Output: 'Foo: baz'
+$foo->printPHP();       // Output: 'PHP is great' 
+$bar->printItem('baz'); // Output: 'Bar: baz'
+$bar->printPHP();       // Output: 'PHP is great'
+</code></pre>
+</section>
+<section data-markdown>
+### Visibility
+- **Public** can be accessed from anywhere.
+- **Protected** can be accessed from sub/inherited classes and containing class
+- **private** can be accessed only from the containing class
+</section>
+<section>
+<h4>Example Protected</h4>
+<pre><code style="font-size:14px; line-spacing:1px; line-height:16px">class MyClass
+{
+    public $public = 'Public';
+    protected $protected = 'Protected';
+    private $private = 'Private';
+
+    function printHello()
+    {
+        echo $this->public;
+        echo $this->protected;
+        echo $this->private;
+    }
+}
+
+$obj = new MyClass();
+echo $obj->public; // Works
+echo $obj->protected; // Fatal Error
+echo $obj->private; // Fatal Error
+$obj->printHello(); // Shows Public, Protected and Private
+</code></pre>
+</section>
+<section>
+<h4>Example Private</h4>
+<pre><code style="font-size:14px; line-spacing:1px; line-height:16px">class MyClass2 extends MyClass
+{
+    // We can redeclare the public and protected method, but not private
+    protected $protected = 'Protected2';
+
+    function printHello()
+    {
+        echo $this->public;
+        echo $this->protected;
+        echo $this->private;
+    }
+}
+
+$obj2 = new MyClass2();
+echo $obj2->public; // Works
+echo $obj2->protected; // Fatal Error
+echo $obj2->private; // Undefined
+$obj2->printHello(); // Shows Public, Protected2, Undefined
+
+</code></pre>
+</section>
+<section data-markdown>
+### Why OOP?
+
+- Scope and Encapsulation
+- Code Re-use
+- Easier real life object modeling
+- Type enforcement
+- Testability
+- Maintenance
+
+</section>
+<section data-markdown>
+## Q/A?
+</section>
+<section data-markdown>
+## OOP Advanced
+</section>
+<section data-markdown>
+- Auto loading
+- Class Abstraction
+- Interfaces
+- Traits
+- Polymorphism
+- Object Iteration
+- Magic methods
+- Overloading
+- Serialization
+</section>
+<section data-markdown>
+### Loading classes
+#### Earlier
+
+- Put all the classes in separate file.
+    - class.a.php, class.b.php
+    - include all the classes with include statement
+- Problems
+    - Tedious to write all the includes
+    - Keep track of the includes.
+</section>
+<section data-markdown>
+### Loading classes
+#### Now
+
+- Put all the classes in separate file.
+    - class.a.php, class.b.php
+    - lazily include them on the runtime using `__autoload`.
+
+```php
+function __autoload($class_name) {
+    include 'class.' . $class_name . '.php';
+}
+
+$obj  = new MyClass1();
+$obj2 = new MyClass2(); 
+```
+</section>
+<section data-markdown>
+#### Even Better 
+`spl_autoload_register()`
+
+- Allows multiple funcitons to be regiestered
+- Handles existing `__autoload`
+- Also possible to *unregister* a function
+</section>
+<section data-markdown>
+### Abstract classes
+
+- class should have at least one `abstract` method
+- `abstract` method must not have body
+- provides a abstract blueprint, hence can not be instantiated
+- abstract classes and method are defined with `abstract` keyword
+</section>
+<section data-markdown>
+#### Example
+
+*abstract class*
+
+```
+abstract class AbstractClass{
+    // Force Extending class to define this method
+    abstract protected function getValue();
+    abstract protected function prefixValue($prefix);
+
+    // Common method
+    public function printOut(){
+        print $this->getValue() . "\n";
+    }
+}
+```
+*concrete class*
+
+```
+class ConcreteClass1 extends AbstractClass{
+    protected function getValue() {
+        return "ConcreteClass1";
+    }
+
+    public function prefixValue($prefix) {
+        return "{$prefix}ConcreteClass1";
+    }
+}
+```
+
+</section>
+<section data-markdown>
+### Interfaces
+- Defines a public contract of the classes that implement it
+- Ensure consuming classes have spefic signature
+- Interfaces are defined using the `interface` keyword
+- Methods declared in an interface must be public
+</section>
+<section data-markdown>
+#### Example
+
+*Interface*
+
+```
+// Declare the interface 'iTemplate'
+interface iTemplate{
+    public function setVariable($name, $var);
+    public function getHtml($template);
+}
+
+```
+*implementation*
+
+```
+class Template implements iTemplate{
+    private $vars = array();
+  
+    public function setVariable($name, $var){
+        $this->vars[$name] = $var;
+    }
+  
+    public function getHtml($template){
+        foreach($this->vars as $name => $value) {
+            $template = str_replace('{' . $name . '}', $value, $template);
+        }
+ 
+        return $template;
+    }
+}
+```
+
+</section>
+<section data-markdown>
+### Traits
+- Mechanism for code reuse
+- Reuse sets of methods freely in several independent classes living in different class hierarchies
+- Reduces complexity
+- Group functionality in a fine-grained and consistent way
+- Not possible to instantiate
+</section>
+<section data-markdown>
+#### Example
+*Trait*
+```PHP
+class Base {
+    public function sayHello() { echo 'Hello '; }
+}
+
+trait SayWorld {
+    public function sayHello() {
+        parent::sayHello();
+        echo 'World!';
+    }
+}
+
+class MyHelloWorld extends Base {
+    use SayWorld;
+}
+
+$o = new MyHelloWorld();
+$o->sayHello();
+```
+The above example will output: `Hello World!`
+</section>
+<section data-markdown>
+### Polymorphism
+- Greek meaning *having multiple forms*
+- Derived class is type-compatible with its base class
+- One base class can be type-compatible to all different types of its derived class.
+- `is-a` relationship rules
+- If _dolphin_ and _shark_ are fish and fish lives underwater, _dolphin_ and _shark_ live underwater.
+</section>
+<section data-markdown>
+#### Example - Polymorphic behavior
+Base Classes
+```
+class Animal {
+    public $name;
+    public function __construct($name) {
+        $this->name = $name;
+    }
+}
+interface Talkative {
+    public function speak();
+}
+```
+Child Classes
+```
+class Dog extends Animal implements Talkative {
+    public function speak() {
+        return "Woof, woof!";
+    }
+    public function playFetch() {
+        return 'getting the stick';
+    }
+}
+
+class Cat extends Animal implements Talkative {
+    public function speak() {
+        return "Meow...";
+    }
+}
+```
+</section>
+<section data-markdown>
+#### Example - Polymorphic behavior
+```
+function makeSpeak(Talkative $being){
+    return $being->speak();
+}
+
+$animals = array(new Dog('Odie'), new Cat('Snowball'));
+
+foreach ($animals as $animal) {
+    print $animal->name . " says: " . makeSpeak($animal) . PHP_EOL;
+}
+```
+Output
+```
+Odie says: Woof, woof!
+Snowball says: Meow...
+```
+</section>
+<section data-markdown>
+### Object Iteration
+- PHP 5 Feature
+- Iterate through object properties with `foreach`
+- Only public properties are accessable.
+
+```PHP
+class MyClass{
+    public $var1 = 'value 1';
+    public $var2 = 'value 2';
+    public $var3 = 'value 3';
+    protected $protected = 'protected var';
+
+    public function public_method(){ return "public_method";}
+}
+
+$class = new MyClass();
+foreach($class as $key => $value) {
+    print "$key => $value\n";
+}
+```
+Output:
+```
+var1 => value 1
+var2 => value 2
+var3 => value 3
+```
+</section>
+<section data-markdown>
+### Magic Methods
+- PHP reserves all function names starting with __ as magical
+    - `__construct()`, `__destruct()`, `__call()`, `__callStatic()`, `__get()`, `__set()`, `__isset()`, `__unset()`, `__sleep()`, `__wakeup()`, `__toString()`, `__invoke()`, `__set_state()`, `__clone()` and `__debugInfo()`
+</section>
+<section data-markdown>
+### Overloading
+- Uses magic method to achive overloading
+- `__get()`, `__set()`, `__call()`, `__callStatic()` are used
+</section>
+<section data-markdown>
+#### Overloading Example
+```php
+class MethodTest{
+    public function __call($name, $arguments){
+        echo "Calling object method '$name' "
+             . implode(', ', $arguments). "\n";
+    }
+    public static function __callStatic($name, $arguments){/** PHP 5.3.0  */
+        echo "Calling static method '$name' "
+             . implode(', ', $arguments). "\n";
+    }
+}
+
+$obj = new MethodTest;
+$obj->runTest('in object context');
+$obj->runTest('in', 'object', 'context');
+MethodTest::runTest('in static context');  // As of PHP 5.3.0
+```
+Output
+```text
+Calling object method 'runTest' in object context
+Calling object method 'runTest' in, object, context
+Calling static method 'runTest' in static context
+```
+</section>
+<section data-markdown>
+### Serialization
+
+- `serialize()` to serialize any object
+- `unserialize()` to re-build the serialized object
+- Class definition must be present while calling `unserialize()`
+- Resource types cannot be serialized, need special care.
+- `serialize()` and `unserialize()` calls `__sleep()` and `__wakeup()` methods respectively
+</section>
+<section data-markdown style="font-size:28px;">
+```php
+class Connection{
+    protected $link;
+    private $dsn, $username, $password;
+    public function __construct($dsn, $username, $password){
+        $this->dsn = $dsn;
+        $this->username = $username;
+        $this->password = $password;
+        $this->connect();
+    }
+    private function connect(){
+        $this->link = new PDO($this->dsn, $this->username, $this->password);
+    }
+    public function __sleep(){
+        return array('dsn', 'username', 'password');
+    }
+    public function __wakeup(){
+        $this->connect();
+    }
+}
+```
+</section>
+<section data-markdown>
+## Q/A?
+</section>
+<section data-markdown>
+## Design Pattern
+</section>
+<section data-markdown>
+### Definition
+*In software engineering, a design pattern is a general **reusable solution** to a **commonly occurring problem** within a given context in **software design***
+</section>
+<section data-markdown>
+### Common Patterns
+- Object Creational Pattern
+    - Factory
+    - Singleton
+    - Dependency Injection
+- Structural Pattern
+    - Facade
+    - Front Controller
+- Architectural Design Pattern 
+    - Model–View–Controller
+</section>
+<section data-markdown>
+### Factory Pattern
+- An object that produces other object
+- Usually done by a method call.
+- Can produce from simple to most complex object
+- Also known as Simple Factory. Farther classification exists
+   - Abstract Factory
+   - Factory Method
+</section>
+<section data-markdown>
+#### Example
+```
+class FormatFactory{
+    public static function build($type){
+        $class = $type . 'Format';
+        return new $class;
+    }
+}
+class Format{ 
+    public function print_type(){
+        print $this->type . PHP_EOL;
+    }
+}
+class StringFormat extends Format{ public $type="String";}
+class NumberFormat extends Format{ public $type="Number";}
+
+FormatFactory::build('String')->print_type();
+FormatFactory::build('Number')->print_type();
+```
+
+Any idea what could be the output?
+</section>
+<section data-markdown>
+#### Output
+    String
+    Number
+</section>
+<section data-markdown>
+### Singleton
+- Ensure that a class has **only one instance** 
+- Has a global point of access to it
+</section>
+<section data-markdown>
+#### Example
+```
+public class User {
+    private static $instance = null;
+    private __construct() { }
+ 
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new User();
+        }
+        return self::$instance;
+    }
+}
+$user1 = User::getInstance();
+$user2 = User::getInstance();
+$user3 = User::getInstance();
+```
+</section>
+<section data-markdown>
+### Dependency Injection
+- Move hard coded dependecy
+- Pass the dependency by constructor or by setter
+- Provides Decoupling
+- Testable code
+</section>
+<section data-markdown>
+#### Example
+**Bad code**
+```
+class MyClass{
+  private $dependency;
+  
+  public function __construct(){
+    $this->dependency = new Dependency();
+  }
+}
+```
+**Good Code, DI Applied**
+```
+class MyClass{
+  private $dependency;
+  
+  public function __construct(Dependency $dep){
+    $this->dependency = $dep;
+  }
+}
+```
+</section>
+<section data-markdown>
+### Facade
+- Provides a **simplified interface** to a larger body of code
+- Make a software library easier to use
+- Make api more readable
+- Most libraries use Facade
+</section>
+<section data-markdown>
+#### Example
+```PHP
+// Create the Transport
+$transport = Swift_SmtpTransport::newInstance('smtp.example.org', 25)
+  ->setUsername('your username')
+  ->setPassword('your password')
+  ;
+
+// Create the Mailer using your created Transport
+$mailer = Swift_Mailer::newInstance($transport);
+
+// Create a message
+$message = Swift_Message::newInstance('Wonderful Subject')
+  ->setFrom(array('john@doe.com' => 'John Doe'))
+  ->setTo(array('receiver@domain.org', 'other@domain.org' => 'A name'))
+  ->setBody('Here is the message itself');
+
+// Send the message
+$result = $mailer->send($message);
+```
+</section>
+<section data-markdown>
+### Front Controller
+- Only used in Web applications
+- Provides a centralized entry point for handling requests
+- Most PHP MVC frameworks uses it. Laravel, Yii, Zend Framework, Symfony etc
+- Helps to avoid duplication
+- Session, Input filtering, caching, routing etc common stuff reside here.
+</section>
+<section data-markdown>
+### Model–View–Controller
+- Most used GUI framework
+- Not only used in web but also in desktop app
+- Three main components
+    - **Model**: Represents data, business model
+    - **View**: Shows the visible content on web to user.
+    - **Controller**: Co-ordinate between View and Model
+- Other variants  HMVC, MVA, MVP, MVVM
+</section>
+<section data-markdown>
+#### Diagram
+![MVC Workflow diagram](mvc-diagram1.png)
+</section>
+<section data-markdown>
+## Q/A?
+</section>
+<section data-markdown>
+###Shiplu Mokaddim 
+
+_Unix Hacker_, _Senior Software Engineer _
+
+**NewsCred Inc. **
+
+---
+
+@shiplu, github.com/shiplu
+
+in/mokaddim, shiplu.mokadd.im
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+-->
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                slideNumber: true,
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
